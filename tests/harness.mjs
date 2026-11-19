@@ -22,9 +22,9 @@ function baseSettings() {
     imageSelector: '',
     promptSelector: '',
     bindings: {
-      focus: { code: 'KeyF', label: 'F', enabled: true, mods: { ctrl: false, alt: false, shift: false, meta: false } },
-      generate: { code: 'KeyG', label: 'G', enabled: true, mods: { ctrl: false, alt: false, shift: false, meta: false } },
-      save: { code: 'KeyH', label: 'H', enabled: true, mods: { ctrl: false, alt: false, shift: false, meta: false } },
+      focus: { code: 'KeyC', label: 'C', enabled: true, mods: { ctrl: false, alt: false, shift: false, meta: false } },
+      generate: { code: 'KeyZ', label: 'Z', enabled: true, mods: { ctrl: false, alt: false, shift: false, meta: false } },
+      save: { code: 'KeyX', label: 'X', enabled: true, mods: { ctrl: false, alt: false, shift: false, meta: false } },
       saveAll: { code: '', label: '', enabled: false, mods: { ctrl: false, alt: false, shift: false, meta: false } }
     }
   };
@@ -200,18 +200,18 @@ function anchorDownloads() {
     /^novelai-\d{8}-\d{6}(?:-\d+)?\.(?:png|webp|jpg)$/.test(el.download));
 }
 
-const gEvent = fire('KeyG', 'g');
-check('G clicks the Generate button', generateButton.clicks === 1, `clicks=${generateButton.clicks}`);
-check('G is consumed by the extension', gEvent.defaultPrevented && gEvent.stopped);
+const zEvent = fire('KeyZ', 'z');
+check('Z clicks the Generate button', generateButton.clicks === 1, `clicks=${generateButton.clicks}`);
+check('Z is consumed by the extension', zEvent.defaultPrevented && zEvent.stopped);
 check('unrelated button is untouched', historyButton.clicks === 0);
 
-fire('KeyH', 'h');
+fire('KeyX', 'x');
 await new Promise((resolve) => setImmediate(resolve));
-check('H creates one image download', anchorDownloads().length === 1 && anchorDownloads()[0].clicks === 1,
+check('X creates one image download', anchorDownloads().length === 1 && anchorDownloads()[0].clicks === 1,
   `anchors=${anchorDownloads().length}`);
 
 const textarea = new El('textarea', document);
-const typingEvent = fire('KeyG', 'g', textarea);
+const typingEvent = fire('KeyZ', 'z', textarea);
 check('typing in a prompt does not generate', generateButton.clicks === 1 && !typingEvent.defaultPrevented);
 
 const rebound = baseSettings();
@@ -220,7 +220,7 @@ rebound.bindings.generate = {
   mods: { ctrl: true, alt: false, shift: false, meta: false }
 };
 applySettings(rebound);
-fire('KeyG', 'g');
+fire('KeyZ', 'z');
 check('old key stops working after a rebind', generateButton.clicks === 1);
 const jEvent = fire('KeyJ', 'j', body, { ctrlKey: true });
 check('custom Ctrl+J generates', generateButton.clicks === 2 && jEvent.defaultPrevented);
@@ -252,7 +252,7 @@ remoteImage.src = 'https://static.novelai.net/generated/123.png';
 remoteImage.naturalWidth = 1024;
 images.push(remoteImage);
 applySettings(baseSettings());
-fire('KeyH', 'h');
+fire('KeyX', 'x');
 await new Promise((resolve) => setImmediate(resolve));
 check('remote image goes to the download bridge', sent.length === 1 &&
   sent[0].type === 'nai-download' && sent[0].url.includes('static.novelai.net'),
@@ -265,17 +265,17 @@ customNodes.set('#go', [customButton]);
 const customSettings = baseSettings();
 customSettings.generateSelector = '#go';
 applySettings(customSettings);
-fire('KeyG', 'g');
+fire('KeyZ', 'z');
 check('custom selector overrides text detection', customButton.clicks === 1 && generateButton.clicks === 2);
 
 // Prompt focus action.
-fire('KeyF', 'f');
-check('F focuses the prompt field', document.activeElement === promptField && promptField.focused === true);
+fire('KeyC', 'c');
+check('C focuses the prompt field', document.activeElement === promptField && promptField.focused === true);
 
 document.activeElement = null;
 promptField.focused = false;
-fire('KeyF', 'f', undesiredField);
-check('typing guard keeps F from stealing focus', promptField.focused !== true && document.activeElement === null);
+fire('KeyC', 'c', undesiredField);
+check('typing guard keeps C from stealing focus', promptField.focused !== true && document.activeElement === null);
 
 const customPrompt = new El('textarea', document);
 customPrompt.attrs.placeholder = 'Something else';
@@ -283,7 +283,7 @@ customNodes.set('#prompt', [customPrompt]);
 const promptSettings = baseSettings();
 promptSettings.promptSelector = '#prompt';
 applySettings(promptSettings);
-fire('KeyF', 'f');
+fire('KeyC', 'c');
 check('custom prompt selector overrides auto-detection',
   customPrompt.focused === true && document.activeElement === customPrompt);
 

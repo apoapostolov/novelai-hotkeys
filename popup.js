@@ -13,9 +13,9 @@
     imageSelector: '',
     promptSelector: '',
     bindings: {
-      focus: { code: 'KeyF', label: 'F', enabled: true, mods: { ctrl: false, alt: false, shift: false, meta: false } },
-      generate: { code: 'KeyG', label: 'G', enabled: true, mods: { ctrl: false, alt: false, shift: false, meta: false } },
-      save: { code: 'KeyH', label: 'H', enabled: true, mods: { ctrl: false, alt: false, shift: false, meta: false } },
+      focus: { code: 'KeyC', label: 'C', enabled: true, mods: { ctrl: false, alt: false, shift: false, meta: false } },
+      generate: { code: 'KeyZ', label: 'Z', enabled: true, mods: { ctrl: false, alt: false, shift: false, meta: false } },
+      save: { code: 'KeyX', label: 'X', enabled: true, mods: { ctrl: false, alt: false, shift: false, meta: false } },
       saveAll: { code: '', label: '', enabled: false, mods: { ctrl: false, alt: false, shift: false, meta: false } }
     }
   };
@@ -23,8 +23,8 @@
   const ACTIONS = [
     ['focus', 'Focus prompt field'],
     ['generate', 'Generate next image'],
-    ['save', 'Save latest image'],
-    ['saveAll', 'Save whole batch']
+    ['save', 'Download latest image'],
+    ['saveAll', 'Download whole batch']
   ];
 
   let settings = clone(DEFAULTS);

@@ -16,15 +16,15 @@
     promptSelector: '',
     bindings: {
       focus: {
-        code: 'KeyF', label: 'F', enabled: true,
+        code: 'KeyC', label: 'C', enabled: true,
         mods: { ctrl: false, alt: false, shift: false, meta: false }
       },
       generate: {
-        code: 'KeyG', label: 'G', enabled: true,
+        code: 'KeyZ', label: 'Z', enabled: true,
         mods: { ctrl: false, alt: false, shift: false, meta: false }
       },
       save: {
-        code: 'KeyH', label: 'H', enabled: true,
+        code: 'KeyX', label: 'X', enabled: true,
         mods: { ctrl: false, alt: false, shift: false, meta: false }
       },
       saveAll: {
@@ -349,9 +349,9 @@
         .then(() => downloadItem(item, saveAll ? index : null))
         .then((result) => {
           if (result && result.ok) {
-            toast(saveAll ? `Saved ${index + 1}/${items.length}` : `Saved ${result.filename}`);
+            toast(saveAll ? `Downloaded ${index + 1}/${items.length}` : `Downloaded ${result.filename}`);
           } else {
-            toast(`Save failed: ${result && result.error ? result.error : 'unknown error'}`, true);
+            toast(`Download failed: ${result && result.error ? result.error : 'unknown error'}`, true);
           }
           return !!(result && result.ok);
         });

@@ -22,10 +22,12 @@ The signature preference is only needed for locally built, unsigned xpi files.
 
 ## Use
 
-- `F` focuses the prompt field, ready for typing.
-- `G` clicks the Generate button, producing the next image.
-- `H` saves the newest generated image to the normal download folder.
-- **Save whole batch** is off by default. Bind it in the popup to save up to the four newest images at once.
+- `C` focuses the prompt field, ready for typing.
+- `Z` clicks the Generate button, producing the next image.
+- `X` downloads the newest generated image to the normal download folder.
+- **Download whole batch** is off by default. Bind it in the popup to download up to the four newest images at once.
+
+All three bindings are configurable in the popup: click a key box, press a new key, optionally hold a modifier, or press Esc to disable it.
 
 Shortcuts do not fire while typing in prompt fields, inputs, selects or contenteditable regions.
 
