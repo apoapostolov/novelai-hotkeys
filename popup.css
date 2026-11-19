@@ -1,0 +1,144 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 320px;
+  margin: 0;
+  background: #13152c;
+  color: #fff;
+  font: 13px/1.45 "Source Sans Pro", system-ui, sans-serif;
+}
+
+body {
+  padding: 12px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+header img {
+  width: 32px;
+  height: 32px;
+}
+
+h1 {
+  margin: 0;
+  font: 600 16px/1.2 "Eczar", Georgia, serif;
+  color: #f5f3c2;
+}
+
+header p {
+  margin: 2px 0 0;
+  font-size: 11px;
+  color: #ffffff88;
+}
+
+.group {
+  padding: 10px 0;
+  border-top: 1px solid #22253f;
+}
+
+h2 {
+  margin: 0 0 8px;
+  font: 600 12px/1.2 "Eczar", Georgia, serif;
+  color: #f5f3c2;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 3px 0;
+  cursor: pointer;
+}
+
+.toggle input {
+  accent-color: #f5f3c2;
+  margin: 0;
+}
+
+.binding-row {
+  display: grid;
+  grid-template-columns: 1fr 104px 38px;
+  gap: 6px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.binding-label {
+  color: #fff;
+}
+
+button {
+  font: 600 12px/1.2 inherit;
+  color: #fff;
+  background: #22253f;
+  border: 1px solid #333754;
+  border-radius: 4px;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: #f5f3c2;
+}
+
+.keybox.capturing {
+  border-color: #f5f3c2;
+  color: #f5f3c2;
+}
+
+.clear {
+  padding: 6px 4px;
+  color: #ffffff99;
+}
+
+.hint {
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: #ffffff77;
+}
+
+.field {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.field span {
+  display: block;
+  margin-bottom: 3px;
+  font-size: 11px;
+  color: #ffffff99;
+}
+
+.field input {
+  width: 100%;
+  padding: 6px 8px;
+  color: #fff;
+  background: #0e0f21;
+  border: 1px solid #22253f;
+  border-radius: 4px;
+  font: 12px/1.2 inherit;
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid #22253f;
+}
+
+#status {
+  font-size: 11px;
+  color: #f5f3c2;
+}

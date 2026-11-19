@@ -1,0 +1,28 @@
+.nai-hk-toast {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 2147483647;
+  max-width: 340px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  background: #191b31;
+  color: #fff;
+  border: 1px solid #22253f;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
+  font: 600 13px/1.4 "Source Sans Pro", system-ui, sans-serif;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.nai-hk-toast.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nai-hk-toast.is-error {
+  border-color: #ff7878;
+  color: #ffd7d7;
+}

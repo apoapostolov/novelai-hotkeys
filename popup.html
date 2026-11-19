@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NovelAI Hotkeys</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header>
+    <img src="assets/icon-32.png" alt="">
+    <div>
+      <h1>NovelAI Hotkeys</h1>
+      <p>novelai.net/image</p>
+    </div>
+  </header>
+
+  <section class="group">
+    <label class="toggle"><span>Enable hotkeys</span><input type="checkbox" id="enabled"></label>
+    <label class="toggle"><span>Ignore typing in text fields</span><input type="checkbox" id="ignoreTyping"></label>
+    <label class="toggle"><span>Show action toast</span><input type="checkbox" id="showToasts"></label>
+    <label class="toggle"><span>Ask where to save</span><input type="checkbox" id="saveAs"></label>
+  </section>
+
+  <section class="group">
+    <h2>Shortcuts</h2>
+    <div id="bindings"></div>
+    <p class="hint">Click a key box, then press a key. Esc clears it.</p>
+  </section>
+
+  <section class="group">
+    <h2>Advanced</h2>
+    <label class="field">
+      <span>Generate button selector</span>
+      <input type="text" id="generateSelector" placeholder="auto-detect by button text">
+    </label>
+    <label class="field">
+      <span>Image selector</span>
+      <input type="text" id="imageSelector" placeholder="auto-detect generated images">
+    </label>
+    <label class="field">
+      <span>Prompt field selector</span>
+      <input type="text" id="promptSelector" placeholder="auto-detect the prompt input">
+    </label>
+  </section>
+
+  <footer>
+    <button type="button" id="reset">Reset defaults</button>
+    <span id="status"></span>
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
