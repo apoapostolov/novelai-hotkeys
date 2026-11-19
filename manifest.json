@@ -6,7 +6,10 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "novelai-hotkeys@apoapostolov",
-      "strict_min_version": "109.0"
+      "strict_min_version": "140.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
     }
   },
   "permissions": ["storage", "downloads"],
@@ -16,6 +19,7 @@
     "https://static.novelai.net/*"
   ],
   "background": {
+    "scripts": ["background.js"],
     "service_worker": "background.js"
   },
   "content_scripts": [
