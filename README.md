@@ -56,9 +56,7 @@ The popup has four controls beyond the key bindings: a master switch, the typing
 
 NovelAI changes its markup from time to time. The Advanced fields let you point the extension at the right elements with a CSS selector:
 
-- **Generate button selector** finds the button that starts a generation.
-- **Image selector** finds the result images.
-- **Prompt field selector** finds the prompt input.
+The Generate button selector field finds the button that starts a generation, the Image selector field finds the result images, and the Prompt field selector field finds the prompt input.
 
 Leave a field blank to use automatic detection. Detection picks the visible button whose text starts with `Generate`, result images from `img` elements backed by data URLs, blob URLs or novelai.net CDN URLs, and the prompt field from a text input or contenteditable region whose label or placeholder mentions `prompt`. Icons and SVGs are ignored.
 
