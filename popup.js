@@ -134,7 +134,7 @@
       const clear = document.createElement('button');
       clear.type = 'button';
       clear.className = 'clear';
-      clear.textContent = 'Off';
+      clear.textContent = '×';
       clear.title = 'Disable this shortcut';
       clear.addEventListener('click', () => {
         settings.bindings[name] = {

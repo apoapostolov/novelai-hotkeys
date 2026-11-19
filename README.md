@@ -1,61 +1,76 @@
-# NovelAI Hotkeys
+<p align="center">
+  <img src="docs/icon.png" alt="NovelAI Hotkeys icon: a hand pressing a button" width="112">
+</p>
 
-A Firefox extension for `https://novelai.net/image`. One key generates the next image and another saves it. Both bindings are changeable from the toolbar popup.
+<p align="center">
+  <img src="docs/hero.png" alt="One-Handed NovelAI: keyboard control for NovelAI" width="100%">
+</p>
+
+<h1 align="center">NovelAI Hotkeys</h1>
+
+<p align="center">Generate an image, download it, and get back to the prompt without leaving the keyboard.</p>
+
+<p align="center">
+  <a href="https://github.com/apoapostolov/novelai-hotkeys/releases/latest"><img src="https://img.shields.io/github/v/release/apoapostolov/novelai-hotkeys" alt="Latest stable release version"></a>
+  <a href="https://github.com/apoapostolov/novelai-hotkeys/releases/latest"><img src="https://img.shields.io/github/release-date/apoapostolov/novelai-hotkeys?display_date=published_at&amp;label=last%20release" alt="Last release date"></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions"><img src="https://img.shields.io/badge/type-browser%20extension-purple" alt="Browser extension"></a>
+  <a href="https://www.mozilla.org/firefox/new/"><img src="https://img.shields.io/badge/Firefox-140%2B-orange" alt="Firefox 140 or newer"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue" alt="MIT license"></a>
+</p>
+
+NovelAI Hotkeys puts the three actions you repeat most on three keys. Press `Z` to generate the next image, `X` to download the newest one, and `C` to put the cursor back in the prompt. The extension runs only on `novelai.net/image` and does not touch other sites.
+
+Every binding is changeable in the toolbar popup. You can also add a fourth shortcut that downloads the whole latest batch, and decide whether downloads ask for a location.
+
+## Settings
+
+![The NovelAI Hotkeys popup with the C, Z and X bindings and the advanced selector fields](docs/settings-1.0.0.png)
+
+The popup opens from the toolbar icon. Click a key box and press a key to rebind it, hold a modifier if you want one, or press Esc to turn the shortcut off.
+
+| Default key | Action |
+| --- | --- |
+| `C` | Focus the prompt field |
+| `Z` | Click Generate to produce the next image |
+| `X` | Download the newest generated image |
+| Off | Download up to four images from the latest batch, when bound |
+
+Shortcuts do not fire while you are typing in a prompt, input, select or contenteditable region, so writing a prompt never sends an accidental generate or download.
 
 ## Install
 
-Temporary load, no signing needed:
+The 1.0.0 xpi is attached to the [release](https://github.com/apoapostolov/novelai-hotkeys/releases/tag/v1.0.0). It is built locally and is not signed by Mozilla, so Firefox will not install it from a normal download link.
 
-1. Open `about:debugging` in Firefox.
-2. Choose **This Firefox**, then **Load Temporary Add-on**.
-3. Select `manifest.json` in this folder.
+For a temporary load:
 
-The add-on is removed when Firefox closes.
+1. Download the source from this repository and keep the folder.
+2. Open `about:debugging` in Firefox.
+3. Choose **This Firefox**, then **Load Temporary Add-on**.
+4. Select `manifest.json` in the project folder.
 
-Permanent install:
-
-1. Run `python tools/build_xpi.py` to build `novelai-hotkeys-1.0.0.xpi`.
-2. Add `user_pref("xpinstall.signatures.required", false);` to `user.js` in the target profile.
-3. Copy the xpi to that profile's `extensions/` folder as `novelai-hotkeys@apoapostolov.xpi` and restart Firefox.
-
-The signature preference is only needed for locally built, unsigned xpi files.
-
-## Use
-
-- `C` focuses the prompt field, ready for typing.
-- `Z` clicks the Generate button, producing the next image.
-- `X` downloads the newest generated image to the normal download folder.
-- **Download whole batch** is off by default. Bind it in the popup to download up to the four newest images at once.
-
-All three bindings are configurable in the popup: click a key box, press a new key, optionally hold a modifier, or press Esc to disable it.
-
-Shortcuts do not fire while typing in prompt fields, inputs, selects or contenteditable regions.
+The add-on unloads when Firefox closes. For a permanent install, set `user_pref("xpinstall.signatures.required", false);` in the profile's `user.js`, then open the xpi as a local file and restart Firefox.
 
 ## Customize
 
-Click the toolbar icon. Each of the three actions has a key box: click it, press the key you want, and optionally hold Ctrl, Alt, Shift or Meta. Press Esc or the **Off** button to disable a binding. The popup also has toggles for enabling hotkeys, the typing guard, the action toast and the ask-where-to-save download option. Changes apply immediately to open tabs.
+The popup has four controls beyond the key bindings: a master switch, the typing guard, the action toast, and **Ask where to save**. Changes apply to open tabs immediately.
 
-If NovelAI changes its markup, the two Advanced fields accept CSS selectors:
+NovelAI changes its markup from time to time. The Advanced fields let you point the extension at the right elements with a CSS selector:
 
-- **Generate button selector** points at the Generate button.
-- **Image selector** points at the result images.
-- **Prompt field selector** points at the prompt text input.
+- **Generate button selector** finds the button that starts a generation.
+- **Image selector** finds the result images.
+- **Prompt field selector** finds the prompt input.
 
-Leave any of them blank for automatic detection. Detection picks the visible button whose text starts with `Generate`, result images from `img` elements backed by data URLs, blob URLs or novelai.net CDN URLs, and the prompt field from text inputs or contenteditable regions whose label or placeholder mentions `prompt`. Icons and SVGs are ignored.
+Leave a field blank to use automatic detection. Detection picks the visible button whose text starts with `Generate`, result images from `img` elements backed by data URLs, blob URLs or novelai.net CDN URLs, and the prompt field from a text input or contenteditable region whose label or placeholder mentions `prompt`. Icons and SVGs are ignored.
 
 ## How it works
 
-`content.js` holds the hotkey listener and the button and image detection. Data and blob images are saved from the page with an anchor download; remote images are passed to `background.js`, which calls `browser.downloads.download`. Settings live in `browser.storage.local` under the `settings` key.
+`content.js` listens for the keys and finds NovelAI's controls. Images served as data or blob URLs are downloaded from the page; remote images go through `background.js` to `browser.downloads.download`. Settings are stored with `browser.storage.local` under the `settings` key.
 
-## Files
+## Development
 
-- `manifest.json`: MV3 manifest, gecko id `novelai-hotkeys@apoapostolov`
-- `content.js`, `content.css`: page-side logic and toast
-- `background.js`: download bridge
-- `popup.html`, `popup.js`, `popup.css`: settings UI
-- `assets/`: toolbar and manifest icons
-- `tools/make_icons.py`: regenerates icons from the master drawing
-- `tools/build_xpi.py`: packages the signed-ready xpi
-- `tests/harness.mjs`: executes the shipped scripts against stub browser APIs
+Run `node tests/harness.mjs` to exercise the shipped scripts against stub browser APIs, and `python tools/build_xpi.py` to build the xpi. The icons are exported from `assets/icon-source.png` with `python tools/prepare_icon.py`, and the hero comes from `python tools/make_hero.py` using the captured settings shot. `docs/screenshots.md` records where each image came from and how to retake it.
 
-Version 1.0.0.
+## License
+
+[MIT](LICENSE).
+
